@@ -1,4 +1,4 @@
 N = int(input())
-num = [int(x) for x in input().split()]
+num = list(map(int,input().split()))
 v = int(input())
 print(num.count(v))
