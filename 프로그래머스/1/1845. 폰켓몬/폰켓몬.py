@@ -1,9 +1,9 @@
+from itertools import permutations
 def solution(nums):
-    answer = 0
-    result = []
-    num = len(nums)//2
-    set1 = list(set(nums))
-    if len(set1)<num:
-        return len(set1)
-    else:
-        return num
+    data = dict.fromkeys(set(nums), 0)
+    for num in nums:
+        data[num] += 1
+        
+    answer = min(len(data), len(nums)//2)
+       
+    return answer
