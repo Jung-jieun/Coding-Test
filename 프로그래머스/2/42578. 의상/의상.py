@@ -1,13 +1,17 @@
+from itertools import permutations
 def solution(clothes):
-    closet = {}
-    for name, kind in clothes:
-        # 각 종류별 가진 의상을 저장 (종류:[이름, 이름, ...])
-        if kind in closet.keys():
-            closet[kind] += [name]
-        else:
-            closet[kind] = [name]
-    # A의 종류가 N개, B의 종류가 M개 일 때 가능한 모든 경우의 수 (N+1)(M+1)                
     answer = 1
-    for i, j in closet.items():
-        answer *= (len(j)+1)
+    wear = {}
+    
+    for item in clothes:
+        kind = item[1]
+        
+        if kind in wear:
+            wear[kind] += 1
+        else:
+            wear[kind] = 1
+    
+    for kind, count in wear.items():
+        answer *= (count+1)
+    
     return answer-1
