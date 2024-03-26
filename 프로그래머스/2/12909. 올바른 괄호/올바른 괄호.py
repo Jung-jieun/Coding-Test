@@ -1,13 +1,15 @@
 def solution(s):
-    count = 0
-    for i in s:
-        if i=='(':
-            count += 1
-        else :
-            if count == 0:
+    stack = []
+    
+    for bracket in s:
+        if bracket == '(':
+            stack.append(bracket)
+        else:
+            if not stack:
                 return False
-            count -= 1
-    if count==0:
-        return True
-    else:
+            else:
+                stack.pop()
+    if stack :
         return False
+    else:
+        return True
