@@ -1,18 +1,27 @@
 def solution(answers):
-    student1 = [1,2,3,4,5]
-    student2 = [2,1,2,3,2,4,2,5]
-    student3 = [3,3,1,1,2,2,4,4,5,5]
-    num1=num2=num3 = 0
-    for i, answer in enumerate(answers):
-        if student1[i % len(student1)] == answer:
-            num1 += 1
-        if student2[i % len(student2)] == answer:
-            num2 += 1
-        if student3[i % len(student3)] == answer:
-            num3 += 1
-    num = [num1, num2, num3]
-    student = []
-    for j in range(3):
-        if num[j]==max(num):
-            student.append(j+1)
-    return student
+    result = []
+    student_1 = [1,2,3,4,5]
+    student_2 = [2,1,2,3,2,4,2,5]
+    student_3 = [3,3,1,1,2,2,4,4,5,5]
+    
+    num_1 = 0
+    num_2 = 0
+    num_3 = 0
+
+    for idx, answer in enumerate(answers):
+        if answer == student_1[idx%5]:
+            num_1 += 1
+        if answer == student_2[idx%8]:
+            num_2 += 1
+        if answer == student_3[idx%10]:
+            num_3 += 1
+            
+    result.append(num_1)
+    result.append(num_2)
+    result.append(num_3)
+    
+    winner = []
+    for student, number in enumerate(result):
+        if number == max(result):
+            winner.append(student+1)
+    return winner
