@@ -1,12 +1,14 @@
-from itertools import product
 def solution(word):
-    
     dictionary = []
+    moum = 'AEIOU'
     
-    for i in range(1,6):
-        for j in product(['A', 'E', 'I', 'O', 'U'], repeat=i):
-            dictionary.append(''.join(list(j)))
-    
-    dictionary.sort()
+    def recursive(cnt, w):
+        if cnt==5:
+            return
+        for i in range(len(moum)):
+            dictionary.append(w + moum[i])
+            recursive(cnt+1, w+moum[i])
+            
+    recursive(0, "")
     
     return dictionary.index(word)+1
