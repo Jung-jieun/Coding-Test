@@ -1,15 +1,17 @@
 def solution(numbers, target):
+    global answer
     answer = 0
-    q = [[0,0]]
     
-    while len(q)>0:
-        idx, n = q.pop()
-        
-        if idx < len(numbers):
-            q.append([idx+1, n + numbers[idx]])
-            q.append([idx+1, n - numbers[idx]])
+    def dfs(i, total):
+        global answer
+        if i==len(numbers):
+            if total==target:
+                answer += 1
+            return answer
             
-        if idx == len(numbers) and n == target:
-                answer +=1
+        dfs(i+1, total+numbers[i])
+        dfs(i+1, total-numbers[i])
+        return 
     
+    dfs(0,0)
     return answer
