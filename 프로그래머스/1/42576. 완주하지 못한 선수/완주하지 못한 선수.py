@@ -1,12 +1,15 @@
 def solution(participant, completion):
-    name_part = dict.fromkeys(set(participant), 0)
-    for name in participant:
-        name_part[name] += 1
+    name = {}
+    for i in participant:
+        if i not in name:
+            name[i] = 1
+        else:
+            name[i] += 1
+    for j in completion:
+        if name[j]>=1:
+            name[j]-=1
+    
+    not_com = [key for key, value in name.items() if value==1]
+    
+    return not_com[0]
         
-    for name in completion:
-        name_part[name] -= 1
-        
-    for name, count in name_part.items():
-        if count>0:
-            return name
-
