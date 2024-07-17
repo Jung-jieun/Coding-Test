@@ -1,15 +1,15 @@
 def solution(s):
-    stack = []
     
-    for bracket in s:
-        if bracket == '(':
-            stack.append(bracket)
-        else:
-            if not stack:
-                return False
-            else:
-                stack.pop()
-    if stack :
-        return False
-    else:
-        return True
+    stack = []
+    table = {
+        ')':'(',
+        '}':'{',
+        ']':'['
+    }
+    
+    for char in s:
+        if char not in table:
+            stack.append(char)
+        elif not stack or table[char]!=stack.pop():
+            return False
+    return len(stack)==0
