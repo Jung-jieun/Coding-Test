@@ -1,7 +1,10 @@
-from collections import deque
 def solution(arr):
-    q = deque()
-    for num in arr:
-        if num not in q or num != q[-1]:
-            q.append(num)
-    return list(q)
+    answer = []
+    answer.append(arr[0])
+    now = arr[0]
+    
+    for i in arr:
+        if i!=now:
+            answer.append(i)
+            now = i
+    return answer
