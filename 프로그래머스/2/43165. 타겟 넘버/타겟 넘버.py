@@ -1,17 +1,16 @@
 def solution(numbers, target):
-    global answer
     answer = 0
     
-    def dfs(i, total):
-        global answer
-        if i==len(numbers):
-            if total==target:
+    def dfs(index, current_sum):
+        nonlocal answer
+        
+        if index==len(numbers):
+            if current_sum==target:
                 answer += 1
-            return answer
-            
-        dfs(i+1, total+numbers[i])
-        dfs(i+1, total-numbers[i])
-        return 
+            return
+        
+        dfs(index+1, current_sum+numbers[index])
+        dfs(index+1, current_sum-numbers[index])
     
     dfs(0,0)
     return answer
