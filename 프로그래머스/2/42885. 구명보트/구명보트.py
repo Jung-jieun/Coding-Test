@@ -1,13 +1,20 @@
 def solution(people, limit):
     answer = 0
+    
+    if sum(people) < limit:
+        return 1
+    
     people.sort()
     
-    light = 0
-    heavy = len(people)-1
+    i, j = 0, len(people)-1
     
-    while light<heavy:
-        if people[light] + people[heavy] <= limit:
+    while i<=j:
+        if people[i]+people[j]>limit:
+            j -= 1
             answer += 1
-            light += 1
-        heavy -= 1
-    return len(people) - answer
+        else:
+            answer += 1
+            i += 1
+            j -= 1
+        
+    return answer
