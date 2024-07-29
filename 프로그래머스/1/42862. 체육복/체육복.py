@@ -1,18 +1,17 @@
 def solution(n, lost, reserve):
     
-    # 여벌 체육복을 가져왔는데 도난 당한 경우 제외 -> reserve랑 lost랑 중복 없애기
-    two = [r for r in reserve if r not in lost]
+    _reserve = [r for r in reserve if r not in lost]
+    _lost = [l for l in lost if l not in reserve]
     
-    # 체육복을 빌릴 수 있는 학생들 -> reserve랑 lost 중복 없애기
-    rent = [l for l in lost if l not in reserve]
+    _reserve.sort()
+    _lost.sort()
     
-    two.sort()
-    rent.sort()
-    
-    for idx in two:
-        if idx-1 in rent:
-            rent.remove(idx-1)
-        elif idx+1 in rent:
-            rent.remove(idx+1)
-    
-    return n-len(rent)
+    for r in _reserve:
+        q  = r-1
+        s = r+1
+        if q in _lost:
+            _lost.remove(q)
+        elif s in _lost:
+            _lost.remove(s)
+            
+    return n - len(_lost)
