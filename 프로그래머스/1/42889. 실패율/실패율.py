@@ -1,22 +1,11 @@
 def solution(N, stages):
-    answer = []
-    
-    num = len(stages)
-    
+    result = {}
+    user = len(stages)
     for level in range(1, N+1):
-        challenger = stages.count(level)
-        
-        if num==0:
-            prob = 0
+        if user != 0:
+            count = stages.count(level)
+            result[level] = count/user
+            user -= count
         else:
-            prob = challenger/num
-        
-        answer.append([level, prob])
-        num -= challenger
-    
-    lose_prob = []
-    answer.sort(key = lambda x:(-x[1],x[0]))
-    
-    for i in answer:
-        lose_prob.append(i[0])
-    return lose_prob
+            result[level] = 0
+    return sorted(result, key = lambda x:result[x], reverse=True)
