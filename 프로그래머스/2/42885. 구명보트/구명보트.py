@@ -1,20 +1,17 @@
 def solution(people, limit):
+    first = 0
+    last = len(people) - 1
     answer = 0
-    
-    if sum(people) < limit:
-        return 1
-    
-    people.sort()
-    
-    i, j = 0, len(people)-1
-    
-    while i<=j:
-        if people[i]+people[j]>limit:
-            j -= 1
-            answer += 1
-        else:
-            answer += 1
-            i += 1
-            j -= 1
-        
+
+    people.sort(reverse = True)
+
+    while first <= last:
+
+        if people[first] + people[last] <= limit:
+            last -= 1
+
+        first += 1
+        answer += 1
+
+
     return answer
