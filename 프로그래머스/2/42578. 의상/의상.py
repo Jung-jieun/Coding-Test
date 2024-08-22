@@ -1,17 +1,13 @@
-from itertools import permutations
 def solution(clothes):
     answer = 1
-    wear = {}
+    item = {}
     
-    for item in clothes:
-        kind = item[1]
-        
-        if kind in wear:
-            wear[kind] += 1
+    for cloth in clothes:
+        if cloth[1] not in item:
+            item[cloth[1]] = [cloth[0]]
         else:
-            wear[kind] = 1
-    
-    for kind, count in wear.items():
-        answer *= (count+1)
-    
+            item[cloth[1]].append(cloth[0])
+            
+    for _, value in item.items():
+        answer *= (len(value)+1)
     return answer-1
