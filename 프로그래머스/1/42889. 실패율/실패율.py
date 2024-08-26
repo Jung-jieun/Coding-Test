@@ -1,11 +1,14 @@
 def solution(N, stages):
-    result = {}
-    user = len(stages)
-    for level in range(1, N+1):
-        if user != 0:
-            count = stages.count(level)
-            result[level] = count/user
-            user -= count
+    answer = []
+    level = {}
+    num = len(stages)
+    
+    for n in range(1,N+1):
+        if num != 0:
+            used = stages.count(n)
+            level[n] = used/num
+            num -= used
         else:
-            result[level] = 0
-    return sorted(result, key = lambda x:result[x], reverse=True)
+            level[n] = 0
+
+    return sorted(level, key=lambda x:level[x], reverse=True)
