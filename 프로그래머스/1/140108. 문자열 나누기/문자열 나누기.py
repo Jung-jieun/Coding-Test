@@ -1,22 +1,24 @@
 from collections import deque
 def solution(s):
     answer = 0
-    q = deque(s)
+    s = deque(s)
+    same = []
+    diff = []
     
-    while q:
-        x = q.popleft()
-        a = 1
-        b = 0
-        while q:
-            n = q.popleft()
-            if x==n:
-                a += 1
+    while s:
+        string = s.popleft()
+        same.append(string)
+        
+        while s:
+            if same[-1] == s[0]:
+                same.append(s.popleft())
             else:
-                b += 1
-                
-            if a==b:
-                answer += 1
-                break
-        if a!=b:
-            answer += 1
+                diff.append(s.popleft())
+                if len(diff)==len(same):
+                    answer += 1
+                    same = []
+                    diff = []
+                    break
+    if len(same)!=0:
+        answer += 1
     return answer
