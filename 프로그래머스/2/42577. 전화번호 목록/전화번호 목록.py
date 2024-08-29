@@ -1,12 +1,14 @@
 def solution(phone_book):
     answer = True
-    phone_book.sort()
-    phone_num = dict.fromkeys(phone_book, 1)
+    hash_map = {}
     
-    for numbers in phone_num:
-        num = ""
-        for number in numbers:
-            num += number
-            if num in phone_num and num != numbers:
-                return False
-    return True
+    for phone_number in phone_book:
+        hash_map[phone_number] = 1
+        
+    for phone_number in phone_book:
+        temp = ""
+        for num in phone_number:
+            temp += num
+            if temp in hash_map and temp!=phone_number:
+                answer = False
+    return answer
