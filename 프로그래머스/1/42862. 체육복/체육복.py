@@ -1,17 +1,15 @@
 def solution(n, lost, reserve):
+    lost.sort()
+    reserve.sort()
     
-    _reserve = [r for r in reserve if r not in lost]
-    _lost = [l for l in lost if l not in reserve]
+    new_lost = [i for i in lost if i not in reserve]
+    new_reserve = [i for i in reserve if i not in lost]
     
-    _reserve.sort()
-    _lost.sort()
+    for student in new_reserve:
+        
+        if student-1 in new_lost:
+            new_lost.remove(student-1)
+        elif student+1 in new_lost:
+            new_lost.remove(student+1)
     
-    for r in _reserve:
-        q  = r-1
-        s = r+1
-        if q in _lost:
-            _lost.remove(q)
-        elif s in _lost:
-            _lost.remove(s)
-            
-    return n - len(_lost)
+    return n-len(new_lost)
