@@ -1,18 +1,15 @@
 def solution(sequence, k):
-    answer = [0, len(sequence)]
-    l = r = 0
-    num = sequence[0]
+    dic = {idx:num for idx, num in enumerate(sequence)}
+    start = last = 0
+    answer = []
     
-    while True:
-        if num<k:
-            r += 1
-            if r==len(sequence):
-                break
-            num += sequence[r]
-        else:
-            if num==k:
-                if r-l<answer[1]-answer[0]:
-                    answer = [l, r]
-            num -= sequence[l]
-            l += 1
-    return answer
+    for idx, num in enumerate(sequence):
+        end = idx
+        last += num
+        while last>k:
+            last -= dic[start]
+            start += 1
+        if last==k:
+            answer.append([start, end])
+    answer.sort(key=lambda x: (x[1]-x[0], x[0]))
+    return answer[0]
